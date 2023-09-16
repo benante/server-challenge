@@ -4,22 +4,24 @@ const server = express();
 
 module.exports = server;
 
-server.get("/", (req, res) => {
-  res.send("<h1>Hello Express</h1>");
-});
-
-server.get("/colour", (req, res) => {
-  const hex = req.query.hex || "ffffff"; // defaults to white
-  const html = `
-    <style>
-      body {
-        background-color: #${hex};
-      }
-    </style>
-    <form>
-      <label for="hex">Enter hex</label>
-      <input name="hex" value="${hex}">
+const html = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="/cheese" method="post">
+      <label for="cheese">cheese</label>
+      <input type="text" />
+      <label for="rating">rating</label>
+      <input type="number" max="5" min="0" />
+      <button type="submit">Submit</button>
     </form>
-  `;
+  </body>
+</html>
+`;
+server.get("/cheese", (req, res) => {
   res.send(html);
 });
